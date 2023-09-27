@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="../../static/css/formUbi.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <title>Formulario</title>
+</head>
+<body>
+    <main id="inicio">
+        <article class="lado_izq">
+            <div class="caja texto">
+                <h4>Bienvenido <strong>Juan Camilo</strong> agrega una ubicacion de entrega.</h4>
+                <div id="map" style="height: 300px;"></div>
+            </div>
+        </article>
+        <article class="lado_der">
+            <div class="caja formulario">
+                <form action="addUbicacion" method="post">
+                    <h1 class="titulo">Agrega una Ubicacion</h1>
+                    <input type="text" id="nombreUbi" name="nombreUbi" class="campo" placeholder="Nombre del Lugar">
+                    <input type="text" id="latitud" name="latitud" class="campo" placeholder="Latitud">
+                    <input type="text" id="longitud" name="longitud" class="campo" placeholder="Longitud">
+                    <div class="botones">
+                        <button class="btn entrar" type="submit">Agregar</button>
+                        <a href="#" class="btn salir">Cancelar</a>
+                </form>
+                </div>
+            </div>
+        </article>
+    </main>
+    <script src="../../static/js/main.js"></script>
+</body>
+</html>

@@ -37,6 +37,26 @@ def login():
 def registro():
     return render_template('auth/registro.html')
 
+@app.route('/formAdd')
+def formAdd():
+    return render_template('sitio/agregarUbi.html')
+
+@app.route('/addUbicacion', methods=['POST'])
+def addUbicacion():
+    nombre = request.form['nombreUbi']
+    posX = request.form['latitud']
+    posY = request.form['longitud']
+
+    conexion = mysql.connect()
+    cursor = conexion.cursor()
+
+    sql = f"INSERT INTO ubicaciones (nombre, posX, posY) VALUES ('{nombre}', '{posX}', '{posY}')"
+    cursor.execute(sql)
+    conexion.commit()
+    conexion.close()
+    return redirect('/formAdd')
+
+
 @app.route('/data')
 def get_data():
     cursor.execute("SELECT * FROM ubicaciones")
