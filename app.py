@@ -18,12 +18,44 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'reto_ssoftt'
+app.config['MYSQL_DATABASE_DB'] = 'reto_ssoft'
 
 mysql.init_app(app)
 
 conexion = mysql.connect()
 cursor = conexion.cursor()
+
+@app.route('/')
+def index():
+    return render_template('sitio/index.html')
+
+
+@app.route('/data')
+def get_data():
+    cursor.execute("SELECT * FROM ubicaciones")
+    ubicaciones = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM conexiones")
+    conexiones = cursor.fetchall()
+
+    data = []
+    for ubicacion in ubicaciones:
+        nombre, posX, posY = ubicacion
+        data.append({
+            "nombre": nombre,
+            "posX": posX,
+            "posY": posY
+        })
+
+    print("Ubicaciones:", ubicaciones)
+    print("Conexiones:", conexiones)
+
+
+    return jsonify({"ubicaciones": data, "conexiones": conexiones})
+
+
+
+
 
 
 # Consulta las ubicaciones y conexiones desde la base de datos
@@ -39,7 +71,7 @@ conexiones = cursor.fetchall()
 data = {
     "ubicaciones": [],
     "conexiones": [],
-    "inicio": "A" # Establece el nodo de inicio según tus necesidades
+    "inicio": "E" # Establece el nodo de inicio según tus necesidades
 }
 
 # Procesa las ubicaciones y agrega al diccionario
@@ -86,7 +118,7 @@ for conexion in data["conexiones"]:
 
 # Encuentra la ruta más corta entre los nodos especificados en el JSON
 start_node = data["inicio"]
-end_node = "D"  # Puedes cambiar esto según tus necesidades
+end_node = "F"  # Puedes cambiar esto según tus necesidades
 
 print(G.nodes())
 
