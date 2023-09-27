@@ -28,7 +28,7 @@ main#inicio {
 .lado_der .caja {
     border-radius: 38px;
     padding: 36px;
-    height: 435px;
+    height: 280px;
     width: 420px;
 }
 
@@ -218,6 +218,40 @@ main#inicio {
         margin-bottom: 10px; /* Espacio entre los botones */
     }
 }
+
+.container_table {
+    margin: 30px 25px 70px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    table {
+    font-size: 16px;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: #EEEEEE;
+    }
+    
+    td, th {
+    text-align: center;
+    padding: 10px;
+    border-right: 1px solid #333533;
+    }
+    
+    td {
+    font-size: 14px;
+    }
+    
+    thead th {
+    color: #fff;
+    background: #333533;
+    }
+    
+    tr:nth-child(even){
+    background: #BEBEBE;
+    }
 
 
 

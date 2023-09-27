@@ -1,12 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Cargar JSON</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="../../static/css/formUbi.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <title>Formulario</title>
 </head>
 <body>
-    <form action="/cargar_json" method="POST" enctype="multipart/form-data">
-        <input type="file" name="json_file">
-        <input type="submit" value="Cargar JSON">
-    </form>
+    <main id="inicio">
+        <article class="lado_izq">
+            <div class="caja texto">
+                <h4>Visualiza los datos cargados desde el JSON</h4>
+                <div class="container_table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Latitud</th>
+                                <th>Logitud</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for resul in operadores %}
+                            <tr>
+                                <td>{{ resul[0] }}</td>
+                                <td>{{ resul[1] }}</td>
+                                <td>{{ resul[2] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+        </article>
+        <article class="lado_der">
+            <div class="caja formulario">
+                <form action="/cargar_json" method="post" enctype="multipart/form-data">
+                    <h1 class="titulo">Agregar JSON</h1>
+                    <input type="file" name="json_file" class="campo">
+                    <div class="botones">
+                        <button class="btn entrar" type="submit">Agregar</button>
+                        <a href="#" class="btn salir">Cancelar</a>
+                </form>
+                </div>
+            </div>
+        </article>
+    </main>
+    <script src="../../static/js/main.js"></script>
 </body>
 </html>
+<!--     <form action="/cargar_json" method="POST" enctype="multipart/form-data">
+        <input type="file" name="json_file">
+        <input type="submit" value="Cargar JSON">
+    </form> -->
+
