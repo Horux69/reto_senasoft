@@ -29,6 +29,13 @@ cursor = conexion.cursor()
 def index():
     return render_template('sitio/index.html')
 
+@app.route('/login')
+def login():
+    return render_template('auth/login.html')
+
+@app.route('/registro')
+def registro():
+    return render_template('auth/registro.html')
 
 @app.route('/data')
 def get_data():
