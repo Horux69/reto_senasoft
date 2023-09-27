@@ -80,6 +80,57 @@ def get_data():
 
     return jsonify({"ubicaciones": data, "conexiones": conexiones})
 
+@app.route('/addJSON')
+def addJSON():
+    return render_template('sitio/cargarJson.html')
+
+@app.route('/cargar_json', methods=['POST'])
+def cargar_json():
+    # Verificar si se envió un archivo JSON
+    if 'json_file' not in request.files:
+        return "No se seleccionó ningún archivo JSON."
+
+    archivo = request.files['json_file']
+
+    # Verificar si el archivo tiene un nombre y una extensión válidos
+    if archivo.filename == '':
+        return "El archivo no tiene un nombre válido."
+
+    if archivo.filename.endswith('.json'):
+        # Procesar el archivo JSON
+        try:
+            data = archivo.read()  # Leer el contenido del archivo
+            datos_json = json.loads(data)  # Cargar el JSON en un diccionario
+
+            # Inicializa la conexión a la base de datos
+            conexion = mysql.connect()
+            cursor = conexion.cursor()
+
+            # Procesa las ubicaciones y guárdalas en la tabla 'ubicaciones'
+            for ubicacion in datos_json['ubicaciones']:
+                nombre = ubicacion['nombre']
+                posX = ubicacion['posX']
+                posY = ubicacion['posY']
+                cursor.execute("INSERT INTO ubicaciones (nombre, posX, posY) VALUES (%s, %s, %s)", (nombre, posX, posY))
+                conexion.commit()
+
+            # Procesa las conexiones y guárdalas en la tabla 'conexiones'
+            for conexionn in datos_json['conexiones']:
+                ubicacion1 = conexionn['ubicacion1']
+                ubicacion2 = conexionn['ubicacion2']
+                peso = conexionn['peso']
+                cursor.execute("INSERT INTO conexiones (ubicacion1, ubicacion2, peso) VALUES (%s, %s, %s)", (ubicacion1, ubicacion2, peso))
+                conexion.commit()
+
+            cursor.close()  # Cierra el cursor
+            conexion.close()  # Cierra la conexión
+
+            return "Archivo JSON cargado y procesado correctamente."
+        except Exception as e:
+            return f"Error al procesar el archivo JSON: {str(e)}"
+    else:
+        return "El archivo no tiene una extensión JSON válida."
+
 
 
 
@@ -98,7 +149,7 @@ conexiones = cursor.fetchall()
 data = {
     "ubicaciones": [],
     "conexiones": [],
-    "inicio": "E" # Establece el nodo de inicio según tus necesidades
+    "inicio": "Barranquilla" # Establece el nodo de inicio
 }
 
 # Procesa las ubicaciones y agrega al diccionario
@@ -145,7 +196,7 @@ for conexion in data["conexiones"]:
 
 # Encuentra la ruta más corta entre los nodos especificados en el JSON
 start_node = data["inicio"]
-end_node = "F"  # Puedes cambiar esto según tus necesidades
+end_node = "Medellin"  # Puedes cambiar esto según tus necesidades
 
 print(G.nodes())
 
