@@ -34,9 +34,6 @@ cursor = conexion.cursor()
 def index():
     return render_template('sitio/index.html')
 
-
-
-
 @app.route('/')
 def login():
     return render_template('auth/login.html')
@@ -88,9 +85,39 @@ def get_data():
 
     return jsonify({"ubicaciones": data, "conexiones": conexiones})
 
+# Crea la ruta para para visuaizar conexiones y formulario
+
+@app.route('/conexionesUbi')
+def conexionesUbi():
+    sql = "SELECT * FROM conexiones"
+    cursor.execute(sql)
+    conexion.commit()
+    resultados = cursor.fetchall()
+
+    return render_template('sitio/conexionesUbi.html', datosCon = resultados)
+
+# Agrega los datos de las conexiones en la BD
+
+@app.route('/crearConexiones', methods = ['POST'])
+def crearConexiones():
+    ubicacion1 = request.form['ubicacion1']
+    ubicacion2 = request.form['ubicacion2']
+    peso = request.form['peso']
+
+    sql = f"INSERT INTO conexiones (ubicacion1, ubicacion2, peso) VALUES ('{ubicacion1}','{ubicacion2}','{peso}')"
+    cursor.execute(sql)
+    conexion.commit()
+
+    return redirect('/conexionesUbi')
+
 @app.route('/addJSON')
 def addJSON():
-    return render_template('sitio/cargarJson.html')
+    sql = "SELECT * FROM ubicaciones"
+    cursor.execute(sql)
+    conexion.commit()
+    resultados = cursor.fetchall()
+    
+    return render_template('sitio/cargarJson.html', datosUbi = resultados)
 
 @app.route('/cargar_json', methods=['POST'])
 def cargar_json():

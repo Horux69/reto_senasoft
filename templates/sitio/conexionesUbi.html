@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="../../static/css/carjaJson.css">
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <title>Carga de datos</title>
+    <link rel="stylesheet" href="../../static/css/conexionUbi.css">
+    <title>Crear Conexiones</title>
 </head>
 <body>
     <main id="inicio">
         <article class="lado_izq">
             <div class="caja texto">
-                <h4>Visualiza los datos cargados desde el JSON</h4>
+                <h4>Crea conexiones entre las ubicaciones.</h4>
+                <p>Visualiza las conexiones.</p>
                 <div class="container_table">
                     <table>
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Latitud</th>
-                                <th>Logitud</th>
+                                <th>Ubicacion Uno</th>
+                                <th>Ubicacion Dos</th>
+                                <th>Peso</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for resul in datosUbi %}
+                            {% for resul in datosCon %}
                             <tr>
                                 <td>{{ resul[0] }}</td>
                                 <td>{{ resul[1] }}</td>
@@ -37,11 +36,13 @@
         </article>
         <article class="lado_der">
             <div class="caja formulario">
-                <form action="/cargar_json" method="post" enctype="multipart/form-data">
-                    <h1 class="titulo">Agregar JSON</h1>
-                    <input type="file" name="json_file" class="campo">
+                <form action="/crearConexiones" method="post">
+                    <h1 class="titulo">Crear una Conexion</h1>
+                    <input type="text" name="ubicacion1" id="ubicacion1" class="campo" placeholder="Ubicacion 1">
+                    <input type="text" name="ubicacion2" id="ubicacion2" class="campo" placeholder="Ubicacion 2">
+                    <input type="text" name="peso" id="peso" class="campo" placeholder="Peso">
                     <div class="botones">
-                        <button class="btn entrar" type="submit">Agregar</button>
+                        <button class="btn entrar" type="submit">Crear Conexion</button>
                         <a href="/index" class="btn salir">Cancelar</a>
                 </form>
                 </div>
