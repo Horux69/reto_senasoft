@@ -19,10 +19,10 @@ app.secret_key = "digitalforge"
 
 mysql = MySQL()
 
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_HOST'] = 'reto-senasoft.mysql.database.azure.com'
 app.config['MYSQL_DATABASE_PORT'] = 3306
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_USER'] = 'camilo'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Reto1234'
 app.config['MYSQL_DATABASE_DB'] = 'reto_ssoft'
 
 mysql.init_app(app)
