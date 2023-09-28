@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/registro.css">
-    <title>Formulario</title>
+    <title>Registro</title>
 </head>
 <body>
     <main id="inicio">
@@ -15,16 +15,18 @@
             </div>
         </article>
         <article class="lado_der">
-            <div class="caja formulario">
-                <h2 class="titulo">¡Registrate!</h2>
-                <input type="text" class="campo" placeholder="Nombre Completo">
-                <input type="text" class="campo" placeholder="Correo">
-                <input type="text" class="campo" placeholder="Contraseña">
-                <div class="botones">
-                    <a href="#" class="btn entrar">Registrarse</a>
-                    <a href="/login" class="btn salir">Cancelar</a>
+                <div class="caja formulario">
+                    <form action="/registro" method="post">
+                        <h2 class="titulo">¡Registrate!</h2>
+                        <input type="text" id="nombre" name="nombre" class="campo" placeholder="Nombre Completo">
+                        <input type="text" id="email" name="correo" class="campo" placeholder="Correo">
+                        <input type="password" id="contrasena" name="contrasena" class="campo" placeholder="Contraseña">
+                        <div class="botones">
+                            <button type="submit" href="#" class="btn entrar">Registrarse</button>
+                            <a href="/" class="btn salir">Cancelar</a>
+                        </div>
+                    </form>
                 </div>
-            </div>
         </article>
     </main>
 </body>

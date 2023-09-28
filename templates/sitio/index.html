@@ -8,12 +8,35 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 <body>
-    <a href="/formAdd">Agregar Ubicacion</a>
-
     
-    
-    
-    <div id="map" style="height: 500px;"></div>
+    <div class="navbar">
+        <a class="btn entrar" href="/formAdd">Agregar Ubicacion</a>
+        <a class="btn entrar" href="/addJSON">Agregar JSON</a>
+    </div>
+    <main id="inicio">
+        <article class="lado_izq">
+            <div class="caja texto">
+                <h4>Bienvenido <strong>Juan Camilo</strong> agrega una ubicacion de entrega.</h4>
+                <div id="map" style="height: 300px;"></div>
+                <p>La ruta mas corta para llegar es: {% for message in mensaje %}
+                    {{ message }},
+                  {% endfor %}</p>
+            </div>
+        </article>
+        <article class="lado_der">
+            <div class="caja formulario">
+                <form action="/rutaCorta" method="post">
+                    <h1 class="titulo">Calcular la Ruta mas Corta</h1>
+                    <input type="text" id="ubicacion1" name="ubicacion1" class="campo" placeholder="Inicio">
+                    <input type="text" id="ubicacion2" name="ubicacion2" class="campo" placeholder="Llegada">
+                    <div class="botones">
+                        <button class="btn entrar" type="submit">Calcular</button>
+                        <a href="#" class="btn salir">Cancelar</a>
+                </form>
+                </div>
+            </div>
+        </article>
+    </main>
 <script src="../../static/js/main.js"></script>
 </body>
 </html>

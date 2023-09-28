@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/login.css">
-    <title>Formulario</title>
+    <title>Login</title>
 </head>
 <body>
     <main id="inicio">
@@ -17,14 +17,14 @@
         </article>
         <article class="lado_der">
             <div class="caja formulario">
-                <form action="">
+                <form action="/validationLogin" method="post">
                   <h2 class="titulo">¡Inicia Sesion!</h2>
-                <input type="text" class="campo" placeholder="Email">
-                <input type="text" class="campo" placeholder="Contraseña">
-                <div class="botones">
-                    <a href="#" class="btn entrar">Entrar</a>
+                    <input type="text" id="correo" name="correo"  class="campo" placeholder="Email">
+                    <input type="text" id="contrasena" name="contrasena" class="campo" placeholder="Contraseña">
+                    <div class="botones">
+                      <button class="btn entrar" type="submit">Entrar</button>
+                    </div>
                 </form>
-                </div>
             </div>
         </article>
     </main>
