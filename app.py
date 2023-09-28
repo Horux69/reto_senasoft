@@ -32,7 +32,10 @@ cursor = conexion.cursor()
 
 @app.route('/index')
 def index():
-    return render_template('sitio/index.html')
+    if session.get("logueado") and session.get("verificado") == 1:
+        return render_template('sitio/index.html')
+    else:
+        return redirect('/')
 
 @app.route('/')
 def login():
@@ -44,22 +47,28 @@ def registro():
 
 @app.route('/formAdd')
 def formAdd():
-    return render_template('sitio/agregarUbi.html')
+    if session.get("logueado"):
+        return render_template('sitio/agregarUbi.html')
+    else:
+        return redirect('/')
 
 @app.route('/addUbicacion', methods=['POST'])
 def addUbicacion():
-    nombre = request.form['nombreUbi']
-    posX = request.form['latitud']
-    posY = request.form['longitud']
+    if session.get("logueado") and session.get("verificado") == 1:
+        nombre = request.form['nombreUbi']
+        posX = request.form['latitud']
+        posY = request.form['longitud']
 
-    conexion = mysql.connect()
-    cursor = conexion.cursor()
+        conexion = mysql.connect()
+        cursor = conexion.cursor()
 
-    sql = f"INSERT INTO ubicaciones (nombre, posX, posY) VALUES ('{nombre}', '{posX}', '{posY}')"
-    cursor.execute(sql)
-    conexion.commit()
-    conexion.close()
-    return redirect('/formAdd')
+        sql = f"INSERT INTO ubicaciones (nombre, posX, posY) VALUES ('{nombre}', '{posX}', '{posY}')"
+        cursor.execute(sql)
+        conexion.commit()
+        conexion.close()
+        return redirect('/formAdd')
+    else:
+        return redirect('/')
 
 
 @app.route('/data')
@@ -304,7 +313,7 @@ def register():
             smtp.login(email_emisor, email_contrasena)
             smtp.sendmail(email_emisor, correo, em.as_string())
 
-        return "Registro exitoso. Se ha enviado un correo de verificación."
+        return render_template('verificacionToken/verificacion.html')
 
     except Exception as e:
         print(str(e))
@@ -347,7 +356,7 @@ def main_page():
     return "Bienvenido a la página principal."
 
 
-#validacion de login
+# Validacion de credenciales
 
 @app.route('/validationLogin', methods = ['POST'])
 def ValidationLogin():
@@ -365,14 +374,13 @@ def ValidationLogin():
         resultado = cursor.fetchall()
         conexion.commit()
 
-
         print(resultado)
 
         if len(resultado) > 0:
             if encriptada == resultado[0][2]:
                 session["logueado"] = True
                 session["user_name"] = resultado[0][0]
-                session["veficado"] = resultado[0][4]
+                session["verificado"] = resultado[0][4]
 
                 if session["logueado"] == True:
                     return render_template("sitio/index.html")
@@ -381,6 +389,15 @@ def ValidationLogin():
 
             else:
                 return render_template('auth/login.html', mensaje = "Acesso denegado")
+        else:
+            return render_template('auth/login.html', mensaje = "Acesso denegado")
+
+# Cierra la sesion
+
+@app.route('/cerrarSesion')
+def cerrarSesion():
+    session.clear()
+    return redirect('/')
 
 
 

@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+
+/* inicio (se coloca siempre) */
+*{
+    box-sizing: border-box;
+    transform: all 0.3s ease-in-out;
+}
+
+body,html{
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Objetos */
+
+
+main#inicio {
+    background-color: transparent;
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+    position: relative;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+#parrafo {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #444;
+}
+
+#boton {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 18px;
+    padding: 10px 18px;
+
+}
+a {
+    text-decoration: none;
+    color: #f18701;
+}
+
+
+
+/* Clases */
+
+.caja {
+    border-radius: 38px;
+    height: 230px;
+    padding: 36px;
+    width: 500px;
+}
+
+.campo {
+    background-color: transparent;
+    border: none;
+    border-radius: 32px;
+    margin: 16px 0;
+    font-size: 26px;
+    padding: 21px;
+    width: 83%;
+}
+
+
+.claro {
+    background-color: #EEE;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+
+    .clara {
+        background-color: #EEE;
+        box-shadow: 9px 9px 16px #BBB,
+                    -9px -9px 16px #FFF;
+    }
+
+        .clara .campo {
+            box-shadow: inset 4px 4px 9px #BBB,
+                        inset -4px -4px 9px #FFF;
+            color: #777;
+        }
+
+        .btn {
+            padding: 0 8px;
+            position: relative;
+            border: 3px solid rgba(255, 255, 255, 0);
+            outline: none;
+            text-align: center;
+            transition: all 250ms ease-in-out;
+            text-decoration: none;
+            color: #777;
+            padding: 10px 18px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+            .btn.entrar:hover {
+                box-shadow: none;
+                border-color:  rgba(112, 112, 112, 0.5);
+            }
+            .btn.entrar:active {
+                box-shadow: inset 3px 3px 9px #a55e0194,
+                            inset -3px -3px 9px #ffd9a7c4;
+            }
+            .entrar{
+                border-radius: 15px;
+                background-color: #f18701;
+                color: #fff;
+                box-shadow: 4px 4px 9px #a55e0194,
+                            -4px -4px 9px #ffd9a7c4;
+            }
